@@ -18,6 +18,7 @@
       <h2 class="subtitle">Calidad en Productos</h2>
     </div>
 
+    <!-- Botones para hacer los CRUDS -->
     <div class="buttons">
       <button id="read-button">Read</button>
       <button id="insert-button">Insert</button>
@@ -25,10 +26,34 @@
       <button id="delete-button">Delete</button>
     </div>
 
+    <!-- div para mostrar los datos -->
+    <div id="data-container"></div>
+
+    <!-- formulario para insertar datos  -->
+    <div id="insertion-data">
+      <form id="formulario" style="display: none;">
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido">
+        <br>
+        <!-- Otros campos del formulario -->
+        <br>
+        <input type="submit" value="Enviar">
+
+      </form>
+    </div>
+
   </div>
+
 
   <footer>Developed by Group 3</footer>
 
+  <!-- Aquí van a colocar todos sus scripts de JavaScript -->
+  <script src="/js/read.js"></script>
+  <script src="/js/insert.js"></script>
 
 </body>
 
