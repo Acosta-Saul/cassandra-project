@@ -46,14 +46,35 @@
       </form>
     </div>
 
-  </div>
+    <div id="update-data">
+      <form id="formulario-update" style="display: none;">
+        <label for="select-data">Selecciona un registro:</label>
+        <br>
+        <select id="select-data" required>
+          <!-- Opciones cargadas dinámicamente desde la base de datos -->
+        </select>
+        <br>
+        <br>
+        <label for="update-nombre">Nuevo nombre:</label>
+        <input type="text" id="update-nombre" name="update-nombre">
+        <br>
+        <label for="update-apellido">Nuevo apellido:</label>
+        <input type="text" id="update-apellido" name="update-apellido">
+        <!-- Otros campos para la actualización -->
+        <br>
+        <input type="submit" value="Actualizar">
+      </form>
+    </div>
 
+  </div>
 
   <footer>Developed by Group 3</footer>
 
   <!-- Aquí van a colocar todos sus scripts de JavaScript -->
   <script src="/js/read.js"></script>
   <script src="/js/insert.js"></script>
+  
+  <script src="/js/update.js"></script>
 
 </body>
 

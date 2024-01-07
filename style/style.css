@@ -101,3 +101,11 @@ input[type="submit"][value="Enviar"] {
   cursor: pointer;
 
 }
+
+input[type="submit"][value="Actualizar"] {
+  background-color: rgb(202, 44, 70);
+  color: white;
+  padding: 10px 20px 10px 20px;
+  cursor: pointer;
+
+}
