@@ -119,7 +119,6 @@ function showErrorMessage(message) {
   messageContainer.appendChild(errorMessage);
 }
 
-window.onload = getData;
 
 const deleteButton = document.getElementById('delete-button');
 deleteButton.addEventListener('click', getData);
