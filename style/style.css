@@ -172,3 +172,18 @@ img {
   align-items: center;
   justify-content: center;
 }
+
+h3 {
+  color: white;
+  font-size: 25px;
+  padding-bottom: 10px;
+}
+
+select {
+  font-size: 18px;
+  padding: 10px;
+}
+
+option {
+  padding: 5px;
+}

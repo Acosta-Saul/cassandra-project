@@ -58,7 +58,7 @@
 
       </form>
     </div>
-  <!-- formulario para actulizar datos  -->
+    <!-- formulario para actulizar datos  -->
     <div id="update-data">
       <form id="formulario-update" style="display: none;">
         <label for="select-data">Selecciona un registro:</label>
@@ -90,8 +90,21 @@
     <!-- Mensaje y botones -->
     <div id="message-container"></div>
 
+    <!-- Aquí debería mostrarte las tablas según el filtrado que halla hecho -->
+    <div id="filter-container">
+      <h3>Filtro</h3>
+      <select id="opciones">
 
+        <option value="opcion1">Más vendidos</option>
+        <option value="opcion2">Promedio de creditos según sexo</option>
+        <option value="opcion3">Promedio de creditos según rango etario</option>
+      </select>
+      <button onclick="mostrarDatos();">Filtrar</button>
+
+      <div id="data-container"></div>
+    </div>
   </div>
+
 
   <footer>Developed by Group 3</footer>
 
@@ -100,8 +113,9 @@
   <script src="/js/insert.js"></script>
 
   <script src="/js/update.js"></script>
-
   <script src="/js/delete.js"></script>
+
+  <script src="/js/filter.js"></script>
 
 </body>
 
