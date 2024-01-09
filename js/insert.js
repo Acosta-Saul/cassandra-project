@@ -10,17 +10,28 @@ form.addEventListener('submit', (event) => {
   const edades = document.getElementById('edades').value.split(',').map(item => item.trim());
   const numFem = parseInt(document.getElementById('F').value);
   const numMas = parseInt(document.getElementById('M').value);
-
+  
   const generos = [];
-
-  // Agrega 0 para cargar el array con el numero de mujeres que adquirieron el producto
-  for (let index = 0; index < numFem+numMas; index++){
-    if (index < numFem){
-      generos[index] = 0;
-    }else{
-      generos[index] = 1;
-    }
+  
+  // Llenar el array con la cantidad especificada de mujeres (0)
+  for (let i = 0; i < numFem; i++) {
+    generos.push(0);
   }
+  
+  // Llenar el array con la cantidad especificada de hombres (1)
+  for (let i = 0; i < numMas; i++) {
+    generos.push(1);
+  }
+  
+  // Mezclar el array para obtener una distribución aleatoria
+  for (let i = generos.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [generos[i], generos[j]] = [generos[j], generos[i]];
+  }
+  
+  console.log(generos); // Esto imprime el array con la distribución de géneros
+  
+
   // Convierte el arreglo de enteros de genero a array tipo String
   const sexo = generos.map(entero => entero.toString());
 
