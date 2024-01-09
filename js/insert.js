@@ -4,33 +4,48 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
 
   const nombre = document.getElementById('nombre').value;
-  const apellido = document.getElementById('apellido').value;
+  const marca = document.getElementById('marca').value;
+  const unidades = document.getElementById('unidades').value.toString();
+  const promocion = document.getElementById('promocion').value.toString();
+  const edades = document.getElementById('edades').value.split(',').map(item => item.trim());
+  const generos = document.getElementById('generos').value.split(',').map(item => item.trim());
+  const creditos = document.getElementById('creditos').value.split(',').map(item => item.trim());
+  const fecha_vencimiento = document.getElementById('fecha_vencimiento').value;
+  
 
-  const userData = {
+  const productoData = {
     nombre: nombre,
-    apellido: apellido
+    marca: marca,
+    unidades: unidades,
+    promocion: promocion,
+    edades: edades,
+    generos: generos,
+    creditos: creditos,
+    fecha_vencimiento: fecha_vencimiento,
   };
 
+  console.log(productoData);
+
   // Enviar la solicitud POST al servidor
-  fetch('http://localhost:3000/usuarios', {
-    method: 'POST',
-    body: JSON.stringify(userData),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-      console.log('Usuario creado exitosamente');
-      // Aquí podrías hacer algo después de la inserción exitosa
-    } else {
-      throw new Error('Error al crear el usuario');
-    }
-  })
-  .catch(error => {
-    console.error('Error al crear el usuario:', error);
-    // Manejar el error, mostrar un mensaje al usuario, etc.
-  });
+   fetch('http://localhost:3000/productos', {
+     method: 'POST',
+     body: JSON.stringify(productoData),
+     headers: {
+       'Content-Type': 'application/json'
+     }
+   })
+   .then(response => {
+     if (response.ok) {
+       console.log('Usuario creado exitosamente');
+       // Aquí podrías hacer algo después de la inserción exitosa
+     } else {
+       throw new Error('Error al crear el usuario');
+     }
+   })
+   .catch(error => {
+     console.error('Error al crear el usuario:', error);
+     // Manejar el error, mostrar un mensaje al usuario, etc.
+   });
 });
 
 function mostrarFormulario() {

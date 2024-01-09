@@ -43,20 +43,26 @@ app.delete('/delete/:id', async (req, res) => {
 });
 
 // Endpoint para insertar un usuario
-app.post('/usuarios', async (req, res) => {
-  const { nombre, apellido } = req.body;
+app.post('/productos', async (req, res) => {
+  const { nombre, marca,unidades ,promocion ,edades ,generos ,creditos ,fecha_vencimiento } = req.body;
 
-  const userId = uuidv4(); // Genera un ID único para el usuario
+  const Id = uuidv4(); // Genera un ID único para el usuario
 
-  const query = 'INSERT INTO usuarios (id, nombre, apellido) VALUES (?, ?, ?)';
+  const query = 'INSERT INTO productos (id, nombre, marca,unidades,promocion,rango_etario,genero,creditos,fecha_vencimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
   
   try {
     // Ejecutar la consulta para insertar el usuario en la base de datos
-    await client.execute(query, [userId, nombre, apellido]);
-    res.status(201).json({ message: 'Usuario creado exitosamente' });
+    await client.execute(query, [Id,nombre, marca
+      ,unidades
+      ,promocion
+      ,edades
+      ,generos
+      ,creditos
+      ,fecha_vencimiento]);
+    res.status(201).json({ message: 'Producto creado exitosamente' });
   } catch (err) {
-    console.error('Error al insertar el usuario:', err);
-    res.status(500).json({ error: 'Error al crear el usuario' });
+    console.error('Error al insertar el Prodcuto:', err);
+    res.status(500).json({ error: 'Error al crear el Producto' });
   }
 });
 
