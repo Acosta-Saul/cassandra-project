@@ -70,9 +70,6 @@ function handleFormSubmit(event) {
   const marca = document.getElementById('update-marca').value;
   const unidades = document.getElementById('update-unidades').value.toString();
   const promocion = document.getElementById('update-promocion').value.toString();
-  const edades = document.getElementById('update-edades').value.split(',').map(item => item.trim());
-  const generos = document.getElementById('update-generos').value.split(',').map(item => item.trim());
-  const creditos = document.getElementById('update-creditos').value.split(',').map(item => item.trim());
   const fecha_vencimiento = document.getElementById('update-fecha_vencimiento').value;
 
   const productoData = {
@@ -80,11 +77,9 @@ function handleFormSubmit(event) {
     marca: marca,
     unidades: unidades,
     promocion: promocion,
-    edades: edades,
-    generos: generos,
-    creditos: creditos,
     fecha_vencimiento: fecha_vencimiento,
   };
+  
   console.log(productoData);
 
   fetch(`http://localhost:3000/update/${selectedId}`, {

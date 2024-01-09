@@ -56,11 +56,11 @@ app.post('/productos', async (req, res) => {
 
 app.patch('/update/:id', async (req, res) => {
   const productId = req.params.id;
-  const { creditos, fecha_vencimiento, genero, marca, nombre, promocion, edades, unidades } = req.body;
+  const {fecha_vencimiento,marca, nombre, promocion,unidades } = req.body;
   
   try {
-    const query = 'UPDATE productos SET creditos = ?, fecha_vencimiento = ?, genero = ?, marca = ?, nombre = ?, promocion = ?, rango_etario = ?, unidades = ? WHERE id = ?';
-    await client.execute(query, [creditos, fecha_vencimiento, genero, marca, nombre, promocion, edades, unidades, productId]);
+    const query = 'UPDATE productos SET fecha_vencimiento = ?, marca = ?, nombre = ?, promocion = ?, unidades = ? WHERE id = ?';
+    await client.execute(query,[fecha_vencimiento, marca, nombre, promocion,unidades, productId]);
 
     res.status(200).send('Producto actualizado exitosamente');
   } catch (err) {
