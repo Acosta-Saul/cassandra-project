@@ -7,48 +7,45 @@ form.addEventListener('submit', (event) => {
   const marca = document.getElementById('marca').value;
   const unidades = document.getElementById('unidades').value.toString();
   const promocion = document.getElementById('promocion').value.toString();
-  const edades = document.getElementById('edades').value.split(',').map(item => item.trim());
-  const numFem = parseInt(document.getElementById('F').value);
-  const numMas = parseInt(document.getElementById('M').value);
-  
-  const generos = [];
-  
-  // Llenar el array con la cantidad especificada de mujeres (0)
-  for (let i = 0; i < numFem; i++) {
-    generos.push(0);
-  }
-  
-  // Llenar el array con la cantidad especificada de hombres (1)
-  for (let i = 0; i < numMas; i++) {
-    generos.push(1);
-  }
-  
-  // Mezclar el array para obtener una distribución aleatoria
-  for (let i = generos.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [generos[i], generos[j]] = [generos[j], generos[i]];
-  }
-  
-  console.log(generos); // Esto imprime el array con la distribución de géneros
-  
-
-  // Convierte el arreglo de enteros de genero a array tipo String
-  const sexo = generos.map(entero => entero.toString());
-
-  const creditos = document.getElementById('creditos').value.split(',').map(item => item.trim());
   const fecha_vencimiento = document.getElementById('fecha_vencimiento').value;
-  
+
+
+  // Numero de personas que compraron el producto
+  const num_personas = Math.floor(Math.random() * 10)+1;
+
+  let array_edad = [];
+  let array_creditos = [];
+  let array_sexo = [];
+
+  // Obtiene un valor entre 18 y 75 años
+  for (let index = 0; index < num_personas; index++) {
+    array_edad[index] = Math.floor(Math.random() * (75 - 18 + 1)) + 18;
+  }
+
+  // Arreglo int convertido a Arreglo String
+  array_edad = array_edad.map(String);
+
+  // Obtiene un valor entre 1 y 5 como crédito 
+  for (let index = 0; index < num_personas; index++) {
+  array_creditos[index] = Math.floor(Math.random() * 5)+1;   
+  }
+
+  array_creditos = array_creditos.map(String);
+
+  for (let index = 0; index < num_personas; index++) {
+  array_sexo[index] = Math.round(Math.random());
+}
+  array_sexo = array_sexo.map(String);
+
 
   const productoData = {
     nombre: nombre,
     marca: marca,
     unidades: unidades,
     promocion: promocion,
-    edades: edades,
-    generos: sexo,
-    Femenino: numFem,
-    Masculino: numMas,
-    creditos: creditos,
+    edades: array_edad,
+    generos: array_sexo,
+    creditos: array_creditos,
     fecha_vencimiento: fecha_vencimiento,
   };
 
