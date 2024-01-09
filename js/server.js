@@ -54,19 +54,18 @@ app.post('/productos', async (req, res) => {
   }
 });
 
-// Endpoint para manejar las actualizaciones de los usuarios
 app.patch('/update/:id', async (req, res) => {
-  const userId = req.params.id;
-  const { nombre, apellido } = req.body;
+  const productId = req.params.id;
+  const { creditos, fecha_vencimiento, genero, marca, nombre, promocion, edades, unidades } = req.body;
   
   try {
-    const query = 'UPDATE usuarios SET nombre = ?, apellido = ? WHERE id = ?';
-    await client.execute(query, [nombre, apellido, userId]);
+    const query = 'UPDATE productos SET creditos = ?, fecha_vencimiento = ?, genero = ?, marca = ?, nombre = ?, promocion = ?, rango_etario = ?, unidades = ? WHERE id = ?';
+    await client.execute(query, [creditos, fecha_vencimiento, genero, marca, nombre, promocion, edades, unidades, productId]);
 
-    res.status(200).send('Usuario actualizado exitosamente');
+    res.status(200).send('Producto actualizado exitosamente');
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error al actualizar el usuario');
+    res.status(500).send('Error al actualizar el producto');
   }
 });
 

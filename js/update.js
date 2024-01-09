@@ -18,7 +18,7 @@ async function getDataForSelect() {
     data.forEach(item => {
       const option = document.createElement('option');
       option.value = item.id; // Asignar el valor del ID del registro
-      option.textContent = `${item.nombre} ${item.apellido}`; // Asignar el texto a mostrar en la opción
+      option.textContent = `${item.nombre} ${item.marca}`; // Asignar el texto a mostrar en la opción
       select.appendChild(option);
     });
   } else {
@@ -67,17 +67,32 @@ function handleFormSubmit(event) {
   const select = document.getElementById('select-data');
   const selectedId = select.value;
   const nombre = document.getElementById('update-nombre').value;
-  const apellido = document.getElementById('update-apellido').value;
+  const marca = document.getElementById('update-marca').value;
+  const unidades = document.getElementById('update-unidades').value.toString();
+  const promocion = document.getElementById('update-promocion').value.toString();
+  const edades = document.getElementById('update-edades').value.split(',').map(item => item.trim());
+  const generos = document.getElementById('update-generos').value.split(',').map(item => item.trim());
+  const creditos = document.getElementById('update-creditos').value.split(',').map(item => item.trim());
+  const fecha_vencimiento = document.getElementById('update-fecha_vencimiento').value;
+
+  const productoData = {
+    nombre: nombre,
+    marca: marca,
+    unidades: unidades,
+    promocion: promocion,
+    edades: edades,
+    generos: generos,
+    creditos: creditos,
+    fecha_vencimiento: fecha_vencimiento,
+  };
+  console.log(productoData);
 
   fetch(`http://localhost:3000/update/${selectedId}`, {
     method: 'PATCH',
-    body: JSON.stringify({
-      nombre: nombre,
-      apellido: apellido,
-    }),
+    body: JSON.stringify(productoData),
     headers: {
-      'Content-Type': 'application/json',
-    },
+      'Content-Type': 'application/json'
+    }
   })
   .then(response => {
     if (response.ok) {
