@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const client = require('./cassandra-config');
+const cassandra = require('cassandra-driver');
 const bodyParser = require('body-parser'); 
 const { v4: uuidv4 } = require('uuid');
 
@@ -10,12 +11,16 @@ const port = 3000;
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.json()); // Middleware para manejar solicitudes DELETE correctamente
+app.use(express.json());
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something went wrong!');
+});
 
-// Ruta para obtener todos los usuarios
+// Ruta para obtener todos los productos
 app.get('/', async (req, res) => {
   try {
-    const result = await client.execute('SELECT * FROM usuarios');
+    const result = await client.execute('SELECT * FROM productos');
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -23,24 +28,7 @@ app.get('/', async (req, res) => {
   }
 });
 
-// Ruta para eliminar un usuario por ID
-app.delete('/delete/:id', async (req, res) => {
-  const userId = req.params.id;
 
-  try {
-    const result = await client.execute('DELETE FROM usuarios WHERE id = ?', [userId]);
-
-    // Verifica si la eliminación fue exitosa
-    if (result.wasApplied()) {
-      res.json({ message: `Usuario con ID ${userId} eliminado correctamente.` });
-    } else {
-      res.status(404).json({ error: `Usuario con ID ${userId} no encontrado.` });
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error al eliminar usuario de Cassandra.' });
-  }
-});
 
 // Endpoint para insertar un usuario
 app.post('/productos', async (req, res) => {
@@ -82,6 +70,25 @@ app.patch('/update/:id', async (req, res) => {
   }
 });
 
+
+// Ruta para eliminar un producto por ID
+app.delete('/delete/:id', async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    const result = await client.execute('DELETE FROM productos WHERE id = ?', [productId]);
+
+    // Verifica si la eliminación fue exitosa
+    if (result.wasApplied()) {
+      res.json({ message: `Producto con ID ${productId} eliminado correctamente.` });
+    } else {
+      res.status(404).json({ error: `Producto con ID ${productId} no encontrado.` });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al eliminar producto de Cassandra.' });
+  }
+});
 
 
 // Inicia el servidor

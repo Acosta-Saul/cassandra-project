@@ -1,9 +1,8 @@
-// delete.js
-
+//delete
 const dataContainer = document.getElementById('data-container');
 const messageContainer = document.getElementById('message-container');
 
-async function deleteUser(id) {
+async function deleteProduct(id) {
   try {
     const response = await fetch(`http://localhost:3000/delete/${id}`, {
       method: 'DELETE',
@@ -15,7 +14,7 @@ async function deleteUser(id) {
     if (response.ok) {
       return true;  // Indicar que la eliminación fue exitosa
     } else {
-      console.error(`Error al eliminar usuario con ID ${id}.`);
+      console.error(`Error al eliminar producto con ID ${id}.`);
       return false; // Indicar que hubo un error en la eliminación
     }
   } catch (error) {
@@ -30,10 +29,10 @@ async function getData() {
     messageContainer.innerHTML = '';
 
     const response = await fetch('http://localhost:3000');
-    const users = await response.json();
+    const products = await response.json();
 
-    if (users.length <= 0) {
-      alert('No hay usuarios para eliminar.');
+    if (products.length <= 0) {
+      alert('No hay productos para eliminar.');
       return;
     }
 
@@ -43,19 +42,19 @@ async function getData() {
 
     // Agregar encabezados
     const headerRow = document.createElement('tr');
-    ['ID', 'Nombre', 'Apellido', 'Acciones'].forEach(headerText => {
+    ['Nombre', 'Marca', 'Acciones'].forEach(headerText => {
       const th = document.createElement('th');
       th.textContent = headerText;
       headerRow.appendChild(th);
     });
     thead.appendChild(headerRow);
 
-    users.forEach(user => {
+    products.forEach(product => {
       const row = document.createElement('tr');
 
-      const userData = [user.id, user.nombre, user.apellido];
+      const productData = [product.nombre, product.marca];
 
-      userData.forEach(data => {
+      productData.forEach(data => {
         const td = document.createElement('td');
         td.textContent = data;
         row.appendChild(td);
@@ -67,20 +66,20 @@ async function getData() {
       deleteBtn.textContent = 'Eliminar';
       deleteBtn.addEventListener('click', async () => {
         try {
-          const confirmDelete = confirm(`¿Seguro que quieres eliminar al usuario con ID ${user.id}?`);
+          const confirmDelete = confirm(`¿Seguro que quieres eliminar el producto con ID ${product.id}?`);
 
           if (confirmDelete) {
-            const deletionSuccessful = await deleteUser(user.id);
+            const deletionSuccessful = await deleteProduct(product.id);
 
             if (deletionSuccessful) {
               await getData();
-              showSuccessMessage(`Usuario eliminado correctamente.`);
+              showSuccessMessage(`Producto eliminado correctamente.`);
             } else {
-              showErrorMessage(`Error al eliminar al usuario.`);
+              showErrorMessage(`Error al eliminar el producto.`);
             }
           }
         } catch (error) {
-          console.error('Error al eliminar usuario:', error);
+          console.error('Error al eliminar producto:', error);
         }
       });
 
@@ -124,3 +123,4 @@ window.onload = getData;
 
 const deleteButton = document.getElementById('delete-button');
 deleteButton.addEventListener('click', getData);
+
