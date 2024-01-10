@@ -47,7 +47,7 @@ async function getData() {
       campos.forEach(campo => {
         if (campo !== 'id') { // Evitar mostrar la columna de ID en la tabla
           const td = document.createElement('td');
-          td.textContent = JSON.stringify(item[campo]);
+          td.textContent = item[campo];
           row.appendChild(td);
         }
       });

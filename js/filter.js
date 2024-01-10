@@ -36,30 +36,31 @@ async function mostrarDatos() {
         const array2 = data[i]['creditos'].map(num => parseInt(num, 10));
 
         console.log(array);
+        console.log(array2);
 
         let num_femenino = 0;
         let num_masculino = 0;
-        let sum_credito = 0;
+        let sum_credito_masculino = 0;
+        let sum_credito_femenino = 0;
 
         for (let j = 0; j < array.length; j++) {
           if (array[j] === 0) {
             num_femenino++;
+            sum_credito_femenino += array2[j];
           } else if (array[j] === 1) {
             num_masculino++;
+            sum_credito_masculino += array2[j];
           }
         }
 
-        for (let k = 0; k < array2.length; k++) {
-          sum_credito += array2[k];
-        }
-
-        let promedio_credito_masculino = sum_credito / num_masculino;
-        let promedio_credito_femenino = sum_credito / num_femenino;
+        let promedio_credito_masculino = sum_credito_masculino / num_masculino;
+        let promedio_credito_femenino = sum_credito_femenino / num_femenino;
 
         console.log(`En el objeto ${i}:`);
         console.log("Numero de personas Femeninas que compraron el producto (0):", num_femenino);
         console.log("Numero de personas masculinas que compraron el producto (1):", num_masculino);
-        console.log("Suma de Crédito por producto: ", sum_credito);
+        console.log("Suma de Crédito por producto según el sexo masculino: ", sum_credito_masculino);
+        console.log("Suma de Crédito por producto según el sexo femenino: ", sum_credito_femenino);
 
         // Agregar una nueva fila a la tabla con los resultados
         const newRow = tbody.insertRow();
@@ -73,7 +74,9 @@ async function mostrarDatos() {
 
         num_femenino = 0;
         num_masculino = 0;
-        sum_credito = 0;
+        sum_credito_masculino = 0
+        sum_credito_femenino = 0;
+     
       }
 
       // Agregar la tabla al contenedor
