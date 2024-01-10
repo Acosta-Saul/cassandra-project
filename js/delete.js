@@ -105,9 +105,9 @@ async function getData() {
 
             if (deletionSuccessful) {
               await getData();
-              showSuccessMessage(`Producto eliminado correctamente.`);
+              showSuccessMessage(`PRODUCTO ELIMINADO CORRECTAMENTE.`);
             } else {
-              showErrorMessage(`Error al eliminar el producto.`);
+              showErrorMessage(`ERROR AL ELIMINAR EL PRODUCTO.`);
             }
           }
         } catch (error) {

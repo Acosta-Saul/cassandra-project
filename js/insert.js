@@ -1,3 +1,25 @@
+/// Función para mostrar mensaje de éxito
+function showSuccessMessage(message) {
+  // Limpiar el contenido previo en messageContainer
+  messageContainer.innerHTML = '';
+
+  const successMessage = document.createElement('div');
+  successMessage.textContent = message;
+  successMessage.classList.add('texto_g');
+  messageContainer.appendChild(successMessage);
+}
+
+// Función para mostrar mensaje de error
+function showErrorMessage(message) {
+  // Limpiar el contenido previo en messageContainer
+  messageContainer.innerHTML = '';
+
+  const errorMessage = document.createElement('div');
+  errorMessage.textContent = message;
+  errorMessage.classList.add('texto_r');
+  messageContainer.appendChild(errorMessage);
+}
+
 // Manejar el envío del formulario
 const form = document.getElementById('formulario');
 form.addEventListener('submit', (event) => {
@@ -8,17 +30,11 @@ form.addEventListener('submit', (event) => {
   const unidades = document.getElementById('unidades').value.toString();
   const fecha_vencimiento = document.getElementById('fecha_vencimiento').value;
 
-
-  
-
-
-  // Numero de personas que compraron el producto
-  let promocion = Math.floor(Math.random() * 10)+1;
-
+  // Número de personas que compraron el producto
+  let promocion = Math.floor(Math.random() * 10) + 1;
   let array_edad = [];
   let array_creditos = [];
   let array_sexo = [];
-  
 
   // Obtiene un valor entre 18 y 75 años
   for (let index = 0; index < promocion; index++) {
@@ -30,14 +46,15 @@ form.addEventListener('submit', (event) => {
 
   // Obtiene un valor entre 1 y 5 como crédito 
   for (let index = 0; index < promocion; index++) {
-  array_creditos[index] = Math.floor(Math.random() * 5)+1;   
+    array_creditos[index] = Math.floor(Math.random() * 5) + 1;
   }
 
   array_creditos = array_creditos.map(String);
 
   for (let index = 0; index < promocion; index++) {
-  array_sexo[index] = Math.round(Math.random());
-}
+    array_sexo[index] = Math.round(Math.random());
+  }
+
   array_sexo = array_sexo.map(String);
 
   promocion = promocion.toString();
@@ -56,7 +73,7 @@ form.addEventListener('submit', (event) => {
   console.log(productoData);
 
   // Enviar la solicitud POST al servidor
-    fetch('http://localhost:3000/productos', {
+  fetch('http://localhost:3000/productos', {
       method: 'POST',
       body: JSON.stringify(productoData),
       headers: {
@@ -65,17 +82,24 @@ form.addEventListener('submit', (event) => {
     })
     .then(response => {
       if (response.ok) {
-        console.log('Usuario creado exitosamente');
-        // Aquí podrías hacer algo después de la inserción exitosa
+        console.log('PRODUCTO INSERTADO EXITOSAMENTE');
+        // Mostrar mensaje de éxito
+        showSuccessMessage('PRODUCTO INSERTADO EXITOSAMENTE');
+        // Limpiar el formulario después de la inserción exitosa
+        form.reset();
       } else {
-        throw new Error('Error al crear el usuario');
+        throw new Error('ERROR AL INSERTAR EL PRODUCTO');
       }
     })
     .catch(error => {
-      console.error('Error al crear el usuario:', error);
+      console.error('ERROR AL INSERTAR EL PRODUCTO:', error);
+      // Mostrar mensaje de error
+      showErrorMessage('ERROR AL INSERTAR EL PRODUCTO');
       // Manejar el error, mostrar un mensaje al usuario, etc.
     });
 });
+
+
 
 function mostrarFormulario() {
   const form = document.getElementById('formulario');

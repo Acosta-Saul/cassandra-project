@@ -34,52 +34,55 @@
     <div id="data-container"></div>
 
     <!-- formulario para insertar datos  -->
-    <div id="insertion-data">
-      <form id="formulario" style="display: none;">
+  <div id="insertion-data">
+  <form id="formulario" style="display: none;">
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre">
-        <br>
-        <label for="marca">Marca:</label>
-        <input type="text" id="marca" name="marca">
-        <br>
-        <label for="unidades">Unidades:</label>
-        <input type="number" id="unidades" name="unidades">
-        <br>
-        <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
-        <input type="date" name="fecha_vencimiento" id="fecha_vencimiento">
-        <br>
-        <!-- Otros campos del formulario -->
-        <br>
-        <input type="submit" value="Enviar">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    <br>
+    <label for="marca">Marca:</label>
+    <input type="text" id="marca" name="marca" required>
+    <br>
+    <label for="unidades">Unidades:</label>
+    <input type="number" id="unidades" name="unidades" required min="0">
+    <br>
+    <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
+    <input type="date" name="fecha_vencimiento" id="fecha_vencimiento" required>
+    <br>
+    <!-- Otros campos del formulario -->
+    <br>
+    <input type="submit" value="Enviar">
+    <br><br><br><br><br>
+  </form>
+</div>
 
-      </form>
-    </div>
-    <!-- formulario para actulizar datos  -->
-    <div id="update-data">
-      <form id="formulario-update" style="display: none;">
-        <label for="select-data">Selecciona un registro:</label>
-        <br>
-        <select id="select-data" required>
-          <!-- Opciones cargadas dinámicamente desde la base de datos -->
-        </select>
-        <br><br>
-        <label for="update-nombre">Nombre:</label>
-        <input type="text" id="update-nombre" name="update-nombre">
-        <br>
-        <label for="update-marca">Marca:</label>
-        <input type="text" id="update-marca" name="update-marca">
-        <br>
-        <label for="update-unidades">Unidades:</label>
-        <input type="number" id="update-unidades" name="update-unidades">
-        <br>
-        <label for="update-fecha_vencimiento">Fecha de Vencimiento:</label>
-        <input type="date" name="update-fecha_vencimiento" id="update-fecha_vencimiento">
-        <br>
-        <!-- Otros campos del formulario -->
-        <input type="submit" value="Actualizar">
-      </form>
-    </div>
+<!-- formulario para actualizar datos  -->
+<div id="update-data">
+  <form id="formulario-update" style="display: none;">
+    <label for="select-data">Selecciona un registro:</label>
+    <br>
+    <select id="select-data" required>
+      <!-- Opciones cargadas dinámicamente desde la base de datos -->
+    </select>
+    <br><br>
+    <label for="update-nombre">Nombre:</label>
+    <input type="text" id="update-nombre" name="update-nombre" required>
+    <br>
+    <label for="update-marca">Marca:</label>
+    <input type="text" id="update-marca" name="update-marca" required>
+    <br>
+    <label for="update-unidades">Unidades:</label>
+    <input type="number" id="update-unidades" name="update-unidades" required min="0">
+    <br>
+    <label for="update-fecha_vencimiento">Fecha de Vencimiento:</label>
+    <input type="date" name="update-fecha_vencimiento" id="update-fecha_vencimiento" required>
+    <br>
+    <!-- Otros campos del formulario -->
+    <input type="submit" value="Actualizar">
+    <br><br><br><br><br>
+  </form>
+</div>
+
 
     <!-- Mensaje y botones -->
     <div id="message-container"></div>
@@ -96,7 +99,7 @@
       <br><br>
       
       <button onclick="mostrarDatos();">Filtrar</button>
-
+      <br><br><br><br><br>
       <div id="data-container"></div>
     </div>
 

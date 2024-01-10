@@ -1,3 +1,24 @@
+// Función para mostrar mensaje de éxito
+function showSuccessMessage(message) {
+  // Limpiar el contenido previo en messageContainer
+  messageContainer.innerHTML = '';
+
+  const successMessage = document.createElement('div');
+  successMessage.textContent = message;
+  successMessage.classList.add('texto_g');
+  messageContainer.appendChild(successMessage);
+}
+
+// Función para mostrar mensaje de error
+function showErrorMessage(message) {
+  // Limpiar el contenido previo en messageContainer
+  messageContainer.innerHTML = '';
+
+  const errorMessage = document.createElement('div');
+  errorMessage.textContent = message;
+  errorMessage.classList.add('texto_r');
+  messageContainer.appendChild(errorMessage);
+}
 
 async function getDataForSelect() {
   const response = await fetch('http://localhost:3000'); // Obtener datos del servidor
@@ -29,43 +50,41 @@ async function getDataForSelect() {
   }
 }
 
-
 // Llamar a la función para obtener y cargar los datos en el select
-const fetchSelectButton = document.getElementById('update-button'); 
+const fetchSelectButton = document.getElementById('update-button');
 fetchSelectButton.addEventListener('click', getDataForSelect);
 
-//Mostrar formulario
-function mostrarFormulario(){
-
+// Mostrar formulario
+function mostrarFormulario() {
   const filter_container = document.getElementById('filter-container');
-  if (filter_container.style.display != 'none'){
+  if (filter_container.style.display != 'none') {
     filter_container.style.display = 'none';
   }
 
-    // Obtengo el id del formulario
-    const form = document.getElementById('formulario-update');
-    // Limpio el data-container para que no muestre ninguna tabla
-    const container = document.getElementById('data-container');
-    container.innerHTML ='';
-    
-    // Si el formulario tiene en su display 'none', entonces cambia a un display block (formulario activado)
-    if (form.style.display === 'none'){
-      form.style.display='block';
-    // Si no tiene un display 'none' entonces colocalo (formulario desactivado)
-    }else{
-      form.style.display = 'none';
-    }
+  // Obtengo el id del formulario
+  const form = document.getElementById('formulario-update');
+  // Limpio el data-container para que no muestre ninguna tabla
+  const container = document.getElementById('data-container');
+  container.innerHTML = '';
 
-    const disable = document.getElementById('formulario');
-    if (disable.style.display != 'none'){
-      disable.style.display = 'none';
-    }
+  // Si el formulario tiene en su display 'none', entonces cambia a un display block (formulario activado)
+  if (form.style.display === 'none') {
+    form.style.display = 'block';
+  // Si no tiene un display 'none' entonces colócalo (formulario desactivado)
+  } else {
+    form.style.display = 'none';
+  }
 
-    }
-  const updateButton = document.getElementById('update-button');
-  updateButton.addEventListener('click', mostrarFormulario);
-  
-  //Update de los datos a la base de datos
+  const disable = document.getElementById('formulario');
+  if (disable.style.display != 'none') {
+    disable.style.display = 'none';
+  }
+}
+
+const updateButton = document.getElementById('update-button');
+updateButton.addEventListener('click', mostrarFormulario);
+
+// Update de los datos a la base de datos
 // Función para manejar el envío del formulario
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -83,7 +102,7 @@ function handleFormSubmit(event) {
     unidades: unidades,
     fecha_vencimiento: fecha_vencimiento,
   };
-  
+
   console.log(productoData);
 
   fetch(`http://localhost:3000/update/${selectedId}`, {
@@ -95,28 +114,19 @@ function handleFormSubmit(event) {
   })
   .then(response => {
     if (response.ok) {
-      console.log('Actualización exitosa');
+      console.log('SE HA ACTUALIZADO EL PRODUCTO CORRECTAMENTE');
+      // Mostrar mensaje de éxito
+      showSuccessMessage('SE HA ACTUALIZADO EL PRODUCTO CORRECTAMENTE');
     } else {
-      throw new Error('Error en la actualización');
+      throw new Error('ERROR AL ACTUALIZAR EL PRODUCTO');
     }
   })
   .catch(error => {
     console.error(error);
+    // Mostrar mensaje de error
+    showErrorMessage('ERROR AL ACTUALIZAR EL PRODUCTO');
   });
 }
 
 const formularioUpdate = document.getElementById('formulario-update');
 formularioUpdate.addEventListener('submit', handleFormSubmit);
-
-
-
-
-
-
-
-
-
-  
-  
-
-      
