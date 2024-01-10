@@ -4,6 +4,8 @@ async function mostrarDatos() {
   const seleccion = document.getElementById('opciones').value;
   console.log(seleccion);
 
+
+  
   const dataContainer = document.getElementById('data-container');
   dataContainer.innerHTML = ''; // Limpiamos el contenido anterior
 
@@ -48,7 +50,7 @@ async function mostrarDatos() {
   }
 
   // Función para mostrar resultados en la tabla para la Opción 2
-  function mostrarResultadosOpcion2() {
+  function mostrarResultadosOpcion4() {
     // Crea la fila de encabezado
     const headerRow = document.createElement('tr');
 
@@ -104,6 +106,19 @@ async function mostrarDatos() {
     table.appendChild(tbody);
   }
 
+
+//Funcion para mostrar los rangos disponibles para filtar
+function mostrarSelector() {
+  const opciones = document.getElementById('opciones');
+  const selectorRangoEtario = document.getElementById('selectorRangoEtario');
+
+  if (opciones.value === 'opcion3') {
+    selectorRangoEtario.style.display = 'block';
+  } else {
+    selectorRangoEtario.style.display = 'none';
+  }
+}
+
   // Lógica para más vendidos por número de compras (promoción)
   if (seleccion === 'opcion1') {
     try {
@@ -121,14 +136,97 @@ async function mostrarDatos() {
       // Puedes agregar aquí manejo de errores, por ejemplo, mostrar un mensaje de error en el contenedor
       dataContainer.textContent = 'Error al obtener datos.';
     }
-  } else if (seleccion === 'opcion2') {
+  } else if{
+    
+  }
+  else if (seleccion === 'opcion3') {
+
+    mostrarSelector();
+    
+    fetch('http://localhost:3000/promedio_Etario', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('No se pudo obtener los datos');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Aquí recibes los datos del servidor
+      console.log('Datos de rango etario y créditos:', data);
+      
+      // Obtener el valor del rango seleccionado del formulario
+    // Obtener el valor del rango seleccionado del formulario
+    const rangoSeleccionado = document.getElementById('rangoEtario').value; // Suponiendo que el ID del select es 'rangoEtario'
+    
+    // Obtener los límites del rango
+    const [rangoMin, rangoMax] = rangoSeleccionado.split('-').map(Number);
+    
+    // Filtrar los datos del servidor para encontrar coincidencias dentro del rango seleccionado
+    const datosCoincidentes = data.filter(item => {
+      return item.rango_etario.some(edad => {
+        const edadNumerica = parseInt(edad);
+        return !isNaN(edadNumerica) && edadNumerica >= rangoMin && edadNumerica <= rangoMax;
+      });
+    });
+    
+    console.log('Datos coincidentes con el rango seleccionado:', datosCoincidentes);
+    
+    const mensajeContainer = document.getElementById('message-container');
+    
+    const tablaExistente = mensajeContainer.querySelector('table');
+    //Si exite una tabla la elimina para mostrar otra tabla
+    if (tablaExistente) {
+      mensajeContainer.removeChild(tablaExistente);
+    }
+    
+    const tablaContainer = document.createElement('table');
+    const encabezado = tablaContainer.createTHead();
+    const filaEncabezado = encabezado.insertRow();
+    const cuerpoTabla = tablaContainer.createTBody();
+    
+    // Crear encabezado de la tabla
+    const celdaTitulo = filaEncabezado.insertCell();
+    celdaTitulo.textContent = 'Rango Etario';
+    const celdaPromedio = filaEncabezado.insertCell();
+    celdaPromedio.textContent = 'Promedio de Créditos Entregados';
+    
+    // Iterar sobre los datos coincidentes para crear las filas de la tabla
+    datosCoincidentes.forEach(item => {
+      const fila = cuerpoTabla.insertRow();
+      const celdaRango = fila.insertCell();
+      celdaRango.textContent = rangoSeleccionado; // Mostrar el rango seleccionado del formulario
+      const celdaPromedio = fila.insertCell();
+      
+      // Realizar cálculos para obtener el promedio de créditos por cada rango etario
+      const creditos = item.creditos.map(Number);
+      const sumaCreditos = creditos.reduce((acc, credito) => acc + credito, 0);
+      const promedio = creditos.length > 0 ? sumaCreditos / creditos.length : 0;
+      celdaPromedio.textContent = Math.round(promedio); // Mostrar el promedio redondeado en la tabla
+    });
+    
+    mensajeContainer.appendChild(tablaContainer);
+    })
+    
+    .catch(error => {
+     console.error('Error al obtener datos desde el servidor:', error);
+    });
+    
+        }
+  
+  
+  else if (seleccion === 'opcion4') {
     try {
       // Obteniendo datos directamente desde la API
       const response = await fetch('http://localhost:3000');
       resultados = await response.json();
 
       // Mostrar la tabla con los rangos de edad y la cantidad de personas para cada producto para la Opción 2
-      mostrarResultadosOpcion2();
+      mostrarResultadosOpcion4();
     } catch (error) {
       console.error('Error al obtener datos:', error);
       // Puedes agregar aquí manejo de errores, por ejemplo, mostrar un mensaje de error en el contenedor
