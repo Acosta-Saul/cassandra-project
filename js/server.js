@@ -30,7 +30,7 @@ app.get('/', async (req, res) => {
 
 
 
-// Endpoint para insertar un usuario
+// Endpoint para insertar un producto
 app.post('/productos', async (req, res) => {
   const { nombre, marca,unidades ,promocion ,edades ,generos ,creditos ,fecha_vencimiento } = req.body;
 
@@ -54,6 +54,7 @@ app.post('/productos', async (req, res) => {
   }
 });
 
+// Endpoint para modificar un producto
 app.patch('/update/:id', async (req, res) => {
   const productId = req.params.id;
   const {fecha_vencimiento,marca, nombre, promocion,unidades } = req.body;
@@ -89,6 +90,25 @@ app.delete('/delete/:id', async (req, res) => {
   }
 });
 
+// Endpoint para sacar el promedio en basa a rango Etario
+app.get('/promedio_Etario', async (req, res) => {
+  try {
+
+    const query = 'SELECT rango_etario, creditos FROM productos'; 
+    const result = await client.execute(query);
+
+    // Extraer los datos de rango_etario y creditos y manejar las listas
+    const datosExtraidos = result.rows.map(row => ({
+      rango_etario: row.rango_etario || [], // Manejar valores nulos si es necesario
+      creditos: row.creditos || [] // Manejar valores nulos si es necesario
+    }));
+
+    res.json(datosExtraidos);
+  } catch (error) {
+    console.error('Error al obtener datos desde la base de datos:', error);
+    res.status(500).json({ error: 'Error al obtener datos' });
+  } 
+});
 
 // Inicia el servidor
 app.listen(port, () => {
