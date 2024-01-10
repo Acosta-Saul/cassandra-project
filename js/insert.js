@@ -9,6 +9,9 @@ form.addEventListener('submit', (event) => {
   const fecha_vencimiento = document.getElementById('fecha_vencimiento').value;
 
 
+  
+
+
   // Numero de personas que compraron el producto
   let promocion = Math.floor(Math.random() * 10)+1;
 
@@ -83,6 +86,11 @@ function mostrarFormulario() {
     form.style.display = 'block';
   } else {
     form.style.display = 'none';
+  }
+
+  const filter_container = document.getElementById('filter-container');
+  if (filter_container.style.display != 'none'){
+    filter_container.style.display = 'none';
   }
 
   const disable = document.getElementById('formulario-update');

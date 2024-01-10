@@ -1,9 +1,42 @@
 let resultados; // Variable global para almacenar los resultados
 
+
+function mostrarFilter(){
+  const filter_container = document.getElementById('filter-container');
+  if (filter_container.style.display == 'none'){
+    filter_container.style.display = 'block';
+  }else{
+    filter_container.style.display = 'none';
+  }
+
+  const form = document.getElementById('formulario');
+  const container = document.getElementById('data-container');
+  container.innerHTML = '';
+
+  if (form.style.display != 'none') {
+    form.style.display = 'none';
+  }
+
+  const forms = document.getElementById('formulario-update');
+    // Limpio el data-container para que no muestre ninguna tabla
+    const containers = document.getElementById('data-container');
+    containers.innerHTML ='';
+    
+    // Si el formulario tiene en su display 'none', entonces cambia a un display block (formulario activado)
+    if (forms.style.display != 'none'){
+      forms.style.display = 'none';
+    }
+}
+
+
+
+const boton = document.getElementById('filter-button');
+boton.addEventListener('click', mostrarFilter);
+
+
 async function mostrarDatos() {
   const seleccion = document.getElementById('opciones').value;
   console.log(seleccion);
-
 
   
   const dataContainer = document.getElementById('data-container');
@@ -121,6 +154,16 @@ function mostrarSelector() {
 
   // Lógica para más vendidos por número de compras (promoción)
   if (seleccion === 'opcion1') {
+
+    const visibilidad2 = document.getElementById('selectorRangoEtario');
+    if (visibilidad2.style.display != 'none'){
+      visibilidad2.style.display = 'none';
+    }
+
+    const visibilidad = document.getElementById('message-container');
+    visibilidad.textContent='';
+
+
     try {
       // Obteniendo datos directamente desde la API
       const response = await fetch('http://localhost:3000');
@@ -140,6 +183,16 @@ function mostrarSelector() {
   
 // Opcion para filtrar Promedio de Creditos según el sexo
   else if (seleccion === "opcion2") {
+
+    const visibilidad = document.getElementById('message-container');
+    visibilidad.textContent='';
+
+    const visibilidad2 = document.getElementById('selectorRangoEtario');
+    if (visibilidad2.style.display != 'none'){
+      visibilidad2.style.display = 'none';
+    }
+
+
     const response = await fetch('http://localhost:3000');
     const data = await response.json();
 
@@ -220,6 +273,10 @@ function mostrarSelector() {
   }
   else if (seleccion === 'opcion3') {
 
+
+    const visibilidad = document.getElementById('message-container');
+    visibilidad.textContent='';
+
     mostrarSelector();
     
     fetch('http://localhost:3000/promedio_Etario', {
@@ -299,6 +356,16 @@ function mostrarSelector() {
   
   
   else if (seleccion === 'opcion4') {
+
+    const visibilidad2 = document.getElementById('selectorRangoEtario');
+    if (visibilidad2.style.display != 'none'){
+      visibilidad2.style.display = 'none';
+    }
+
+
+    const visibilidad = document.getElementById('message-container');
+    visibilidad.textContent='';
+
     try {
       // Obteniendo datos directamente desde la API
       const response = await fetch('http://localhost:3000');

@@ -2,7 +2,11 @@
 const dataContainer = document.getElementById('data-container');
 const messageContainer = document.getElementById('message-container');
 
+
+
 async function deleteProduct(id) {
+
+
   try {
     const response = await fetch(`http://localhost:3000/delete/${id}`, {
       method: 'DELETE',
@@ -24,6 +28,34 @@ async function deleteProduct(id) {
 }
 
 async function getData() {
+
+  const filter_container = document.getElementById('filter-container');
+  if (filter_container.style.display != 'none'){
+    filter_container.style.display = 'none';
+  }
+
+  const form = document.getElementById('formulario');
+  const container = document.getElementById('data-container');
+  container.innerHTML = '';
+
+  if (form.style.display != 'none') {
+    form.style.display = 'none';
+  }
+
+
+  const forms = document.getElementById('formulario-update');
+    // Limpio el data-container para que no muestre ninguna tabla
+    const containers = document.getElementById('data-container');
+    containers.innerHTML ='';
+    
+    // Si el formulario tiene en su display 'none', entonces cambia a un display block (formulario activado)
+    if (forms.style.display != 'none'){
+      forms.style.display = 'none';
+    }
+
+  
+
+
   try {
     dataContainer.innerHTML = '';
     messageContainer.innerHTML = '';

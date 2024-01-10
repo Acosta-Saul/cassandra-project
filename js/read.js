@@ -14,6 +14,20 @@ async function getData() {
     disable.style.display = 'none';
   }
 
+  const filter_container = document.getElementById('filter-container');
+  if (filter_container.style.display != 'none'){
+    filter_container.style.display = 'none';
+  }
+
+  const form = document.getElementById('formulario-update');
+    
+    const container = document.getElementById('data-container');
+    container.innerHTML ='';
+    
+    if (form.style.display != 'none'){
+      form.style.display = 'none';
+    }
+
   // Si data es mayor que > 0 (data es un array de datos) significa que vienen datos
   if (data.length > 0) {
 

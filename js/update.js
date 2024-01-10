@@ -36,6 +36,12 @@ fetchSelectButton.addEventListener('click', getDataForSelect);
 
 //Mostrar formulario
 function mostrarFormulario(){
+
+  const filter_container = document.getElementById('filter-container');
+  if (filter_container.style.display != 'none'){
+    filter_container.style.display = 'none';
+  }
+
     // Obtengo el id del formulario
     const form = document.getElementById('formulario-update');
     // Limpio el data-container para que no muestre ninguna tabla
