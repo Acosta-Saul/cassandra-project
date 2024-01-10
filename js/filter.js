@@ -280,11 +280,25 @@ function mostrarSelector() {
       const celdaRango = fila.insertCell();
       celdaRango.textContent = rangoSeleccionado; // Mostrar el rango seleccionado del formulario
       const celdaPromedio = fila.insertCell();
-      
-      // Realizar cálculos para obtener el promedio de créditos por cada rango etario
-      const creditos = item.creditos.map(Number);
-      const sumaCreditos = creditos.reduce((acc, credito) => acc + credito, 0);
-      const promedio = creditos.length > 0 ? sumaCreditos / creditos.length : 0;
+    
+      const edadesCoincidentes = item.rango_etario.filter(edad => {
+        const edadNumerica = parseInt(edad);
+        return !isNaN(edadNumerica) && edadNumerica >= rangoMin && edadNumerica <= rangoMax;
+      });
+    
+      let sumaCreditos = 0;
+      let cantidadCreditos = 0;
+    
+      edadesCoincidentes.forEach(edad => {
+        const indice = item.rango_etario.indexOf(edad);
+        const credito = parseInt(item.creditos[indice]);
+        if (!isNaN(credito)) {
+          sumaCreditos += credito;
+          cantidadCreditos++;
+        }
+      });
+    
+      const promedio = cantidadCreditos > 0 ? sumaCreditos / cantidadCreditos : 0;
       celdaPromedio.textContent = Math.round(promedio); // Mostrar el promedio redondeado en la tabla
     });
     
