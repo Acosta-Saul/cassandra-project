@@ -139,27 +139,10 @@ async function mostrarDatos() {
     table.appendChild(tbody);
   }
 
-
-//Funcion para mostrar los rangos disponibles para filtar
-function mostrarSelector() {
-  const opciones = document.getElementById('opciones');
-  const selectorRangoEtario = document.getElementById('selectorRangoEtario');
-
-  if (opciones.value === 'opcion3') {
-    selectorRangoEtario.style.display = 'block';
-  } else {
-    selectorRangoEtario.style.display = 'none';
-  }
-}
-
   // Lógica para más vendidos por número de compras (promoción)
   if (seleccion === 'opcion1') {
 
-    const visibilidad2 = document.getElementById('selectorRangoEtario');
-    if (visibilidad2.style.display != 'none'){
-      visibilidad2.style.display = 'none';
-    }
-
+  
     const visibilidad = document.getElementById('message-container');
     visibilidad.textContent='';
 
@@ -186,12 +169,6 @@ function mostrarSelector() {
 
     const visibilidad = document.getElementById('message-container');
     visibilidad.textContent='';
-
-    const visibilidad2 = document.getElementById('selectorRangoEtario');
-    if (visibilidad2.style.display != 'none'){
-      visibilidad2.style.display = 'none';
-    }
-
 
     const response = await fetch('http://localhost:3000');
     const data = await response.json();
@@ -273,12 +250,8 @@ function mostrarSelector() {
   }
   else if (seleccion === 'opcion3') {
 
-
     const visibilidad = document.getElementById('message-container');
     visibilidad.textContent='';
-
-    mostrarSelector();
-    
     fetch('http://localhost:3000/promedio_Etario', {
       method: 'GET',
       headers: {
@@ -293,63 +266,65 @@ function mostrarSelector() {
     })
     .then(data => {
       // Aquí recibes los datos del servidor
-      console.log('Datos de rango etario y créditos:', data);
-      
-      // Obtener el valor del rango seleccionado del formulario
-    // Obtener el valor del rango seleccionado del formulario
-    const rangoSeleccionado = document.getElementById('rangoEtario').value; // Suponiendo que el ID del select es 'rangoEtario'
+      console.log('Datos de rango etario, créditos, nombre y marca:', data);
     
-    // Obtener los límites del rango
-    const [rangoMin, rangoMax] = rangoSeleccionado.split('-').map(Number);
+      const mensajeContainer = document.getElementById('message-container');
     
-    // Filtrar los datos del servidor para encontrar coincidencias dentro del rango seleccionado
-    const datosCoincidentes = data.filter(item => {
-      return item.rango_etario.some(edad => {
-        const edadNumerica = parseInt(edad);
-        return !isNaN(edadNumerica) && edadNumerica >= rangoMin && edadNumerica <= rangoMax;
+      const tablaExistente = mensajeContainer.querySelector('table');
+      // Si existe una tabla, la eliminamos para mostrar otra
+      if (tablaExistente) {
+        mensajeContainer.removeChild(tablaExistente);
+      }
+    
+      const tablaContainer = document.createElement('table');
+      const encabezado = tablaContainer.createTHead();
+      const filaEncabezado = encabezado.insertRow();
+      const cuerpoTabla = tablaContainer.createTBody();
+    
+      // Crear encabezado de la tabla
+      const encabezados = ['Nombre', 'Marca', '18-29', '30-40', '41-50', '51-60', '61-100'];
+      encabezados.forEach(encabezado => {
+        const celdaEncabezado = filaEncabezado.insertCell();
+        celdaEncabezado.textContent = encabezado;
       });
-    });
     
-    console.log('Datos coincidentes con el rango seleccionado:', datosCoincidentes);
+      // Iterar sobre los datos para crear las filas de la tabla
+      data.forEach(item => {
+        const fila = cuerpoTabla.insertRow();
+        const celdaNombre = fila.insertCell();
+        celdaNombre.textContent = item.nombre;
+        const celdaMarca = fila.insertCell();
+        celdaMarca.textContent = item.marca;
     
-    const mensajeContainer = document.getElementById('message-container');
+        const rangos = ['18-29', '30-40', '41-50', '51-60', '61-100'];
+        rangos.forEach(rango => {
+          const edadesCoincidentes = item.rango_etario.filter(edad => {
+            const edadNumerica = parseInt(edad);
+            return !isNaN(edadNumerica) && edadNumerica >= parseInt(rango.split('-')[0]) && edadNumerica <= parseInt(rango.split('-')[1]);
+          });
     
-    const tablaExistente = mensajeContainer.querySelector('table');
-    //Si exite una tabla la elimina para mostrar otra tabla
-    if (tablaExistente) {
-      mensajeContainer.removeChild(tablaExistente);
-    }
+          let sumaCreditos = 0;
+          let cantidadCreditos = 0;
     
-    const tablaContainer = document.createElement('table');
-    const encabezado = tablaContainer.createTHead();
-    const filaEncabezado = encabezado.insertRow();
-    const cuerpoTabla = tablaContainer.createTBody();
+          edadesCoincidentes.forEach(edad => {
+            const indice = item.rango_etario.indexOf(edad);
+            const credito = parseInt(item.creditos[indice]);
+            if (!isNaN(credito)) {
+              sumaCreditos += credito;
+              cantidadCreditos++;
+            }
+          });
     
-    // Crear encabezado de la tabla
-    const celdaTitulo = filaEncabezado.insertCell();
-    celdaTitulo.textContent = 'Rango Etario';
-    const celdaPromedio = filaEncabezado.insertCell();
-    celdaPromedio.textContent = 'Promedio de Créditos Entregados';
+          const promedio = cantidadCreditos > 0 ? sumaCreditos / cantidadCreditos : 0;
+          const celdaPromedio = fila.insertCell();
+          celdaPromedio.textContent = Math.round(promedio); // Mostrar el promedio redondeado en la tabla
+        });
+      });
     
-    // Iterar sobre los datos coincidentes para crear las filas de la tabla
-    datosCoincidentes.forEach(item => {
-      const fila = cuerpoTabla.insertRow();
-      const celdaRango = fila.insertCell();
-      celdaRango.textContent = rangoSeleccionado; // Mostrar el rango seleccionado del formulario
-      const celdaPromedio = fila.insertCell();
-      
-      // Realizar cálculos para obtener el promedio de créditos por cada rango etario
-      const creditos = item.creditos.map(Number);
-      const sumaCreditos = creditos.reduce((acc, credito) => acc + credito, 0);
-      const promedio = creditos.length > 0 ? sumaCreditos / creditos.length : 0;
-      celdaPromedio.textContent = Math.round(promedio); // Mostrar el promedio redondeado en la tabla
-    });
-    
-    mensajeContainer.appendChild(tablaContainer);
+      mensajeContainer.appendChild(tablaContainer);
     })
-    
     .catch(error => {
-     console.error('Error al obtener datos desde el servidor:', error);
+      console.error('Error al obtener datos desde el servidor:', error);
     });
     
         }
@@ -357,12 +332,7 @@ function mostrarSelector() {
   
   else if (seleccion === 'opcion4') {
 
-    const visibilidad2 = document.getElementById('selectorRangoEtario');
-    if (visibilidad2.style.display != 'none'){
-      visibilidad2.style.display = 'none';
-    }
-
-
+  
     const visibilidad = document.getElementById('message-container');
     visibilidad.textContent='';
 

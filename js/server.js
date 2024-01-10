@@ -92,14 +92,15 @@ app.delete('/delete/:id', async (req, res) => {
 // Endpoint para sacar el promedio en basa a rango Etario
 app.get('/promedio_Etario', async (req, res) => {
   try {
-
-    const query = 'SELECT rango_etario, creditos FROM productos'; 
+    const query = 'SELECT rango_etario, creditos, nombre, marca FROM productos'; // Incluir nombre y marca en la consulta
     const result = await client.execute(query);
 
-    // Extraer los datos de rango_etario y creditos y manejar las listas
+    // Extraer los datos de rango_etario, creditos, nombre y marca y manejar las listas
     const datosExtraidos = result.rows.map(row => ({
       rango_etario: row.rango_etario || [], // Manejar valores nulos si es necesario
-      creditos: row.creditos || [] // Manejar valores nulos si es necesario
+      creditos: row.creditos || [], // Manejar valores nulos si es necesario
+      nombre: row.nombre, // Incluir nombre en los datos extraídos
+      marca: row.marca // Incluir marca en los datos extraídos
     }));
 
     res.json(datosExtraidos);
@@ -108,7 +109,6 @@ app.get('/promedio_Etario', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener datos' });
   } 
 });
-
 // Inicia el servidor
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);

@@ -81,37 +81,24 @@
       </form>
     </div>
 
-
-
     <!-- Mensaje y botones -->
     <div id="message-container"></div>
     <br>
     <!-- Aquí debería mostrarte las tablas según el filtrado que halla hecho -->
     <div id="filter-container" style="display: none;">
       <h3>Filtro</h3>
-      <select id="opciones" onchange="mostrarSelector();">
+      <select id="opciones">
         <option value="opcion1">Más vendidos</option>
         <option value="opcion2">Promedio de créditos según sexo</option>
         <option value="opcion3">Promedio de créditos según rango etario</option>
         <option value="opcion4">Rango etario de personas que compran productos</option>
       </select>
       <br><br>
-      <div id="selectorRangoEtario" style="display: none;">
-        <h3>Eliga el Rango Etario a Filtrar</h3>
-        <select id="rangoEtario">
-          <option value="18-29">18-29</option>
-          <option value="30-59">30-59</option>
-          <option value="60-100">60 o más</option>
-        </select>
-      </div>
-
+      
       <button onclick="mostrarDatos();">Filtrar</button>
 
       <div id="data-container"></div>
     </div>
-
-
-
 
   </div>
 
