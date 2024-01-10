@@ -69,14 +69,12 @@ function handleFormSubmit(event) {
   const nombre = document.getElementById('update-nombre').value;
   const marca = document.getElementById('update-marca').value;
   const unidades = document.getElementById('update-unidades').value.toString();
-  const promocion = document.getElementById('update-promocion').value.toString();
   const fecha_vencimiento = document.getElementById('update-fecha_vencimiento').value;
 
   const productoData = {
     nombre: nombre,
     marca: marca,
     unidades: unidades,
-    promocion: promocion,
     fecha_vencimiento: fecha_vencimiento,
   };
   

@@ -6,19 +6,19 @@ form.addEventListener('submit', (event) => {
   const nombre = document.getElementById('nombre').value;
   const marca = document.getElementById('marca').value;
   const unidades = document.getElementById('unidades').value.toString();
-  const promocion = document.getElementById('promocion').value.toString();
   const fecha_vencimiento = document.getElementById('fecha_vencimiento').value;
 
 
   // Numero de personas que compraron el producto
-  const num_personas = Math.floor(Math.random() * 10)+1;
+  let promocion = Math.floor(Math.random() * 10)+1;
 
   let array_edad = [];
   let array_creditos = [];
   let array_sexo = [];
+  
 
   // Obtiene un valor entre 18 y 75 años
-  for (let index = 0; index < num_personas; index++) {
+  for (let index = 0; index < promocion; index++) {
     array_edad[index] = Math.floor(Math.random() * (75 - 18 + 1)) + 18;
   }
 
@@ -26,17 +26,18 @@ form.addEventListener('submit', (event) => {
   array_edad = array_edad.map(String);
 
   // Obtiene un valor entre 1 y 5 como crédito 
-  for (let index = 0; index < num_personas; index++) {
+  for (let index = 0; index < promocion; index++) {
   array_creditos[index] = Math.floor(Math.random() * 5)+1;   
   }
 
   array_creditos = array_creditos.map(String);
 
-  for (let index = 0; index < num_personas; index++) {
+  for (let index = 0; index < promocion; index++) {
   array_sexo[index] = Math.round(Math.random());
 }
   array_sexo = array_sexo.map(String);
 
+  promocion = promocion.toString();
 
   const productoData = {
     nombre: nombre,
