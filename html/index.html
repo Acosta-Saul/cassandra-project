@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/style/style.css">
+  <title>Cassandra Project</title>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="block">
+      <div class="inline-block">
+        <h1 class="title">Vivity Enterprise</h1>
+        <img src="/img/CassandraLogo.png" alt="">
+      </div>
+      <h2 class="subtitle">Calidad en Productos</h2>
+    </div>
+
+    <!-- Botones para hacer los CRUDS -->
+    <div class="buttons">
+      <button id="read-button">Read</button>
+      <button id="insert-button">Insert</button>
+      <button id="update-button">Update</button>
+      <button id="delete-button">Delete</button>
+      <button id="filter-button">Filter</button>
+    </div>
+
+    <!-- div para mostrar los datos -->
+    <div id="data-container"></div>
+
+    <!-- formulario para insertar datos  -->
+  <div id="insertion-data">
+  <form id="formulario" style="display: none;">
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    <br>
+    <label for="marca">Marca:</label>
+    <input type="text" id="marca" name="marca" required>
+    <br>
+    <label for="unidades">Unidades:</label>
+    <input type="number" id="unidades" name="unidades" required min="0">
+    <br>
+    <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
+    <input type="date" name="fecha_vencimiento" id="fecha_vencimiento" required>
+    <br>
+    <!-- Otros campos del formulario -->
+    <br>
+    <input type="submit" value="Enviar">
+    <br><br><br><br><br>
+  </form>
+</div>
+
+<!-- formulario para actualizar datos  -->
+<div id="update-data">
+  <form id="formulario-update" style="display: none;">
+    <label for="select-data">Selecciona un registro:</label>
+    <br>
+    <select id="select-data" required>
+      <!-- Opciones cargadas dinámicamente desde la base de datos -->
+    </select>
+    <br><br>
+    <label for="update-nombre">Nombre:</label>
+    <input type="text" id="update-nombre" name="update-nombre" required>
+    <br>
+    <label for="update-marca">Marca:</label>
+    <input type="text" id="update-marca" name="update-marca" required>
+    <br>
+    <label for="update-unidades">Unidades:</label>
+    <input type="number" id="update-unidades" name="update-unidades" required min="0">
+    <br>
+    <label for="update-fecha_vencimiento">Fecha de Vencimiento:</label>
+    <input type="date" name="update-fecha_vencimiento" id="update-fecha_vencimiento" required>
+    <br>
+    <!-- Otros campos del formulario -->
+    <input type="submit" value="Actualizar">
+    <br><br><br><br><br>
+  </form>
+</div>
+
+
+    <!-- Mensaje y botones -->
+    <div id="message-container"></div>
+    <br>
+    <!-- Aquí debería mostrarte las tablas según el filtrado que halla hecho -->
+    <div id="filter-container" style="display: none;">
+      <h3>Filtro</h3>
+      <select id="opciones">
+        <option value="opcion1">Más vendidos</option>
+        <option value="opcion2">Promedio de créditos según sexo</option>
+        <option value="opcion3">Promedio de créditos según rango etario</option>
+        <option value="opcion4">Rango etario de personas que compran productos</option>
+      </select>
+      <br><br>
+      
+      <button onclick="mostrarDatos();">Filtrar</button>
+      <br><br><br><br><br>
+      <div id="data-container"></div>
+    </div>
+
+  </div>
+
+  <footer>Developed by Group 3</footer>
+
+  <!-- Scripts de JavaScript -->
+  <script src="/js/read.js"></script>
+  <script src="/js/insert.js"></script>
+
+  <script src="/js/update.js"></script>
+  <script src="/js/delete.js"></script>
+
+  <script src="/js/filter.js"></script>
+
+
+</body>
+
+</html>
