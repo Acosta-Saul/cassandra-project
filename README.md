@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-# cassandra-project
-Levantamiento de una base de datos Cassandra y cargarla con datos que permitan el modelamiento por columnas y un análisis OLAP.
-=======
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/style/readme.css">
-  <title>Informe de Proyecto</title>
-</head>
-
-<body>
 
   <h1>Informe de Proyecto</h1>
   <hr>
@@ -25,26 +10,23 @@ Levantamiento de una base de datos Cassandra y cargarla con datos que permitan e
     <h4>Santacruz, Luis, C.I: 30.498799</h4>
   </div>
 
-  <div class="container">
+ 
 
-    <section>
-      <h2 class="decoracion">Problemática del Proyecto</h2>
+
+   <h2>Problemática del Proyecto</h2>
       <p>Realizar el levantamiento de una Base de Datos NoSQL Cassandra y cargarla con datos que permitan el
         modelamiento por columnas y un análisis OLAP.
         El sistema <strong>debe ser cargado con un set de diferentes productos entre ellos cantidad de unidades,
           compra
-          en promoción, rango etario, sexo, crédito.</strong><br><br>
+          en promoción, rango etario, sexo, crédito.<br><br>
         La aplicación debe realizar consultas sobre todos ellos en la búsqueda de generar información del conjunto,
-        <strong>
-          como puede ser el producto más vendido, promedio de créditos entregados a personas según sexo o rango
-          etario,
-          entre otros.
-        </strong>
-      </p>
-    </section>
+      como puede ser el producto más vendido, promedio de créditos entregados a personas según sexo o rango
+      etario,
+      entre otros.
+  </p>
 
-    <section>
-      <h2 class="decoracion">Objetivos que Deben Alcanzar el Grupo</h2>
+
+  <h2 class="decoracion">Objetivos que Deben Alcanzar el Grupo</h2>
       <div class="list">
         <ul>
           <li>
@@ -61,7 +43,7 @@ Levantamiento de una base de datos Cassandra y cargarla con datos que permitan e
       </div>
     </section>
 
-    <section>
+  <section>
       <h2 class="decoracion">Metodología Utilizada</h2>
       <p>
         Para el desarrollo de este proyecto, se siguió una metodología que abarcó los siguientes pasos:
@@ -77,10 +59,8 @@ Levantamiento de una base de datos Cassandra y cargarla con datos que permitan e
           <li>Despliegue y Evaluación del Rendimiento.</li>
         </ol>
       </div>
-    </section>
-
-    <section>
-      <h2 class="decoracion">Funcionamiento del Proyecto Realizado</h2>
+  
+  <h2 class="decoracion">Funcionamiento del Proyecto Realizado</h2>
       <h3 class="sec">Tecnologías Utilizadas para el Desarrollo del Proyecto</h3>
       <div class="list">
         <ul>
@@ -92,8 +72,8 @@ Levantamiento de una base de datos Cassandra y cargarla con datos que permitan e
           <li>Cassandra</li>
           <li>Datastax DevCenter</li>
         </ul>
-      </div>
-      <h3 class="sec">Análisis del Proyecto</h3>
+  
+  <h3 class="sec">Análisis del Proyecto</h3>
       <p>
         Se utiliza JavaScript junto con el entorno de ejecución Node.js para utilizar la librería de Express que permite
         crear un servidor desde el cual realizar peticiones a la Base de Datos de Cassandra bajo el patrón de diseño MVC
@@ -103,26 +83,24 @@ Levantamiento de una base de datos Cassandra y cargarla con datos que permitan e
         filtrar por productos más vendidos, promedio de créditos entregados según el sexo o rango etario y productos
         vendidos según rango etario.<br>
       </p>
-    </section>
 
-    <section>
-      <h2 class="decoracion">Lecciones Aprendidas</h2>
+
+  <h2 class="decoracion">Lecciones Aprendidas</h2>
       <p>
         Durante el desarrollo de este proyecto, el grupo ha adquirido valiosas lecciones que han contribuido al éxito del mismo:
       </p>
-      <div class="list">
-        <ul>
-          <li>La importancia de una planificación detallada en la definición de requisitos y diseño inicial.</li>
+  
+  <ul>
+        <li>La importancia de una planificación detallada en la definición de requisitos y diseño inicial.</li>
           <li>La necesidad de una comunicación efectiva y continua entre los miembros del equipo para evitar malentendidos.</li>
           <li>La relevancia de las pruebas unitarias y de integración para garantizar el correcto funcionamiento del sistema.</li>
           <li>La utilidad de la documentación clara y completa para facilitar el mantenimiento y la comprensión del proyecto.</li>
           <li>La experiencia práctica en la implementación de tecnologías como Cassandra, Node.js y Express.</li>
         </ul>
-      </div>
-    </section>
+ 
 
-    <section>
-      <h2 class="decoracion">Conclusiones</h2>
+
+  <h2 class="decoracion">Conclusiones</h2>
       <p>
         En conclusión, el proyecto ha logrado cumplir con los objetivos planteados, proporcionando una solución efectiva a la
         problemática de modelar y analizar datos mediante una base de datos NoSQL como Cassandra. La metodología aplicada
@@ -135,10 +113,5 @@ Levantamiento de una base de datos Cassandra y cargarla con datos que permitan e
         Este proyecto no solo ha contribuido al conocimiento teórico, sino que también ha proporcionado una experiencia práctica
         valiosa en el manejo de tecnologías modernas para el desarrollo de sistemas basados en bases de datos NoSQL.
       </p>
-    </section>
-  </div>
 
-</body>
 
-</html>
->>>>>>> proyecto-completo
